@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/filter"
+        android:title="@string/filter"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_filter_list_white_24dp">
+
+        <menu>
+            <item
+                android:id="@+id/Yellow"
+                android:title="1 Yellow"
+                android:checkable="true">
+            </item>
+            <item
+                android:id="@+id/green"
+                android:title="5 Green"
+                android:checkable="true">
+            </item>
+            <item
+                android:id="@+id/teal"
+                android:title="12 Teal"
+                android:checkable="true">
+            </item>
+            <item
+                android:id="@+id/silver"
+                android:title="13 Silver"
+                android:checkable="true">
+            </item>
+            <item
+                android:id="@+id/illini"
+                android:title="22 Illini"
+                android:checkable="true">
+            </item>
+            <item
+                android:id="@+id/hide_markers"
+                android:title="Hide Markers"
+                android:checkable="true">
+            </item>
+        </menu>
+    </item>
+</menu>

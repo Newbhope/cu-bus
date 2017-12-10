@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">CU Bus</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+
+    <string name="api_key">6281936dee024132b158f5deb216c9f5</string>
+
+    <!--tab long press titles-->
+    <string name="tab_title_favorites">Favorites</string>
+    <string name="tab_title_map">Map</string>
+    <string name="tab_title_routes">Routes</string>
+
+    <string name="title_activity_maps">Map</string>
+
+    <string name="hint">Search for stops…</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="favoriteTitle">Favorite</string>
+    <string name="search">Search</string>
+    <string name="location">Location</string>
+    <string name="filter">Filter</string>
+    <string name="refresh">Refresh</string>
+
+    <!--JSON query strings-->
+    <string name="headsign_param">"headsign</string>
+    <string name="route_color_param">route_color</string>
+    <string name="singular_minute">minute</string>
+    <string name="plural_minutes">minutes</string>
+
+    <!--Shared Preferences Keys-->
+    <string name="favoriteKey">favorite</string>
+
+</resources>
