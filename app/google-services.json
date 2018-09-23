@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "623784442226",
+    "firebase_url": "https://subtle-breaker-136818.firebaseio.com",
+    "project_id": "subtle-breaker-136818",
+    "storage_bucket": "subtle-breaker-136818.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:623784442226:android:6f1aa2a7459dbccb",
+        "android_client_info": {
+          "package_name": "com.friedrice.cubus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "623784442226-spsti6c0q42ou7oqtjhq6htrmirv8nrb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQ5zzQUCPoMJmNkJxMPuVLo1fgSunNcMY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
