@@ -37,7 +37,13 @@ public class SettingsActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if(id == android.R.id.home){
-            onBackPressed();
+            /*
+              https://stackoverflow.com/questions/10320179/android-actionbar-up-button-versus-system-back-button
+              Allows user to go back to whatever tab they were looking at instead of always being the favorites tab
+              (Do I really want an action bar back button with the system back button? :shrug:
+             */
+            finish();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);

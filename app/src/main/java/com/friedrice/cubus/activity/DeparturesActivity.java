@@ -266,13 +266,18 @@ public class DeparturesActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.fav) {
-            onHeartClicked(item);
+        switch (item.getItemId()) {
+            case R.id.fav:
+                onHeartClicked(item);
+                break;
+            case R.id.stopLocation:
+                onStopLocationClicked();
+                break;
+            case android.R.id.home:
+                finish();
+                return true;
         }
-        if(id == R.id.stopLocation) {
-            onStopLocationClicked();
-        }
+
         return super.onOptionsItemSelected(item);
     }
 
