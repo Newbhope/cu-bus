@@ -87,8 +87,8 @@ public class DeparturesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_departures);
-        relativeLayout = (RelativeLayout) findViewById(R.id.departuresLayout);
-        message = (TextView) findViewById(R.id.noBusesMessage);
+        relativeLayout = findViewById(R.id.departuresLayout);
+        message = findViewById(R.id.noBusesMessage);
 
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
@@ -97,7 +97,7 @@ public class DeparturesActivity extends AppCompatActivity {
         //change title to stop name
         setTitle(actionBar);
 
-        listView = (ListView) findViewById(R.id.departures);
+        listView = findViewById(R.id.departures);
         departureAdapter = new ArrayAdapter<>(
                 this,
                 R.layout.list_departures,
@@ -237,7 +237,7 @@ public class DeparturesActivity extends AppCompatActivity {
      * Inflates and initializes the SwipeRefreshLayout for the ListView
      */
     private void initializeSwipeRefresh() {
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
+        swipeRefreshLayout = findViewById(R.id.swipeRefresh);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -325,7 +325,7 @@ public class DeparturesActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
+        swipeRefreshLayout = findViewById(R.id.swipeRefresh);
         swipeRefreshLayout.setRefreshing(true);
         refreshData();
         snackbar = Snackbar.make(relativeLayout, "Times Refreshed", Snackbar.LENGTH_SHORT);
