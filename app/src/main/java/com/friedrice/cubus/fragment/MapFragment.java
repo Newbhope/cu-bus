@@ -107,24 +107,30 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
         boolean isChecked = !item.isChecked();
         item.setChecked(isChecked);
-        if(id == R.id.hide_markers) {
-            handleMarkers(isChecked);
+
+        switch (item.getItemId()) {
+            case R.id.hide_markers:
+                handleMarkers(isChecked);
+                break;
+            case R.id.filter:
+                break;
+            default:
+                // meant to capture the route display options, but I'm too dumb to do that explicitly
+                updateRoutes();
+                break;
         }
-        updateRoutes();
         return super.onOptionsItemSelected(item);
     }
 
     private void handleMarkers(boolean isChecked) {
-        if(isChecked) {
-            for(Marker marker : markerList) {
+        if (isChecked) {
+            for (Marker marker : markerList) {
                 marker.remove();
             }
             markerList.clear();
-        }
-        else {
+        } else {
             addStopsToMap();
         }
     }
@@ -132,14 +138,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     /**
      * Draws each checked route and removes every other one.
-     * Called on every checkable item click.
+     * Supposed to be called on every checkable route option.
+     * Inefficiently removes and redraws every polyline needed
      */
     private void updateRoutes() {
-        for(Polyline polyline : routeLines) {
+        for (Polyline polyline : routeLines) {
             polyline.remove();
         }
         Menu routesMenu = menu.findItem(R.id.filter).getSubMenu();
-        for(int i = 0; i < routesMenu.size() - 1; i++) {
+        for (int i = 0; i < routesMenu.size() - 1; i++) {
             MenuItem item = routesMenu.getItem(i);
             if (item.isChecked()) {
                 String routeId = item.getTitle().toString();
@@ -194,7 +201,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             mMap.setMyLocationEnabled(true);
         }
 
-        if (launchNum == 0){
+        if (launchNum == 0) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
         }
 
@@ -210,7 +217,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private void addStopsToMap() {
         try {
             JSONArray stopsArray = stops.getJSONArray(parent_param);
-            for(int i = 0; i < stopsArray.length(); i++) {
+            for (int i = 0; i < stopsArray.length(); i++) {
                 JSONObject stop = stopsArray.getJSONObject(i);
                 String name = stop.getString(name_param);
                 String stopId = stop.getString(id_param);
@@ -245,10 +252,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == 0) { //0 is requestCode for location
+        if (requestCode == 0) { // 0 is requestCode for location
             if (ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION)
-                            == PackageManager.PERMISSION_GRANTED) {
-                if(mMap != null) {
+                    == PackageManager.PERMISSION_GRANTED) {
+                if (mMap != null) {
                     mMap.setMyLocationEnabled(true);
                 }
             }

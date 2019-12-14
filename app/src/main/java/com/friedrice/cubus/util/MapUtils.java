@@ -18,6 +18,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.gms.maps.model.RoundCap;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,22 +34,21 @@ import java.util.List;
 public class MapUtils {
 
     /**
-     * @param mMap GoogleMap to draw the polyline on
-     * @param shapeId Shape ID to draw
-     * @param activity Calling Activity
-     * @param routeLines List to store created polyline in.
+     * @param mMap        GoogleMap to draw the polyline on
+     * @param shapeId     Shape ID to draw
+     * @param activity    Calling Activity
+     * @param routeLines  List to store created polyline in.
      * @param colorString Color to draw polyline in "rrggbb" format. AccentColor is used if null
      */
     public void drawRouteShape(@NonNull final GoogleMap mMap, @NonNull String shapeId,
                                @NonNull final Activity activity, final List<Polyline> routeLines,
                                String colorString) {
-        Log.d("MapUtils", ""+shapeId);
+        Log.d("MapUtils", "" + shapeId);
 
         final int routeColor;
-        if(colorString != null) {
+        if (colorString != null) {
             routeColor = Color.parseColor("#" + colorString);
-        }
-        else {
+        } else {
             routeColor = ContextCompat.getColor(activity.getApplicationContext(), R.color.colorAccent);
         }
         final RequestQueue queue = Volley.newRequestQueue(activity);
@@ -65,46 +65,77 @@ public class MapUtils {
                 try {
                     JSONArray shapes = response.getJSONArray("shapes");
                     ArrayList<LatLng> pointsList = new ArrayList<>();
-                    for(int i = 0; i < shapes.length(); i++) { //constructs polyline out of json response
+                    for (int i = 0; i < shapes.length(); i++) { //constructs polyline out of json response
                         JSONObject point = shapes.getJSONObject(i);
                         double pointLat = point.getDouble("shape_pt_lat");
                         double pointLon = point.getDouble("shape_pt_lon");
                         LatLng pointLatLng = new LatLng(pointLat, pointLon);
                         pointsList.add(pointLatLng);
                     }
-                    Polyline polyline = mMap.addPolyline(new PolylineOptions()
+
+                    Polyline routePolyline = mMap.addPolyline(new PolylineOptions()
                             .addAll(pointsList)
                             .width(10)
-                            .color(routeColor));
-                    if(routeLines != null) {
-                        routeLines.add(polyline);
+                            .color(routeColor)
+                            .zIndex(420)
+                            .startCap(new RoundCap())
+                            .endCap(new RoundCap()));
+                    Polyline blackBorder = mMap.addPolyline(new PolylineOptions()
+                            .addAll(pointsList)
+                            .width(20)
+                            .color(0xff000000)
+                            .zIndex(69)
+                            .startCap(new RoundCap())
+                            .endCap(new RoundCap()));
+
+                    if (routeLines != null) {
+                        routeLines.add(routePolyline);
+                        routeLines.add(blackBorder);
                     }
 
-                } catch (JSONException e) {e.printStackTrace();}
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
-        }, new Response.ErrorListener() {@Override public void onErrorResponse(VolleyError error) {}});
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
         queue.add(shapeRequest);
     }
 
+    /*
+    HARD CODED ROUTE IDs BELOW
+    GO HERE IF ROUTE SHAPES FEATURE BREAKS ON THE MAP
+
+     I should not be hard coding these in
+     https://developer.cumtd.com/api/v2.2/json/gettripsbyroute?key=6281936dee024132b158f5deb216c9f5&route_id=YELLOW
+     Above json response provides the correct routeId. However, this requires a network call, and I'm way too lazy to do those right now
+     Also, I don't really know which shapeId is the correct one to display. Just using the one that occurs the most in the resulting trips response
+     */
     public String getShapeIdFromRouteId(String routeId) {
-        switch(routeId) {
+        switch (routeId) {
             case "YELLOW":
-                return "[@14.0.56288340@]23";
+                // This one broke 12/13/2019
+                return "[@124.0.123464910@]23";
             case "GREEN":
                 return "[@15.0.66064083@]71";
             case "TEAL":
                 return "12W TEAL 12";
             case "SILVER":
-                return "130N SILVER EVENING 1";
+                // and this one
+                return "[@124.0.123898077@]SILVER 2";
             case "ILLINI":
-                return "22S ILLINI 20";
+                // and this one
+                return "[@124.0.123542703@]22N ILLINI 10";
             default:
                 return null;
         }
     }
 
     public String getColorFromRouteId(String routeId) {
-        switch(routeId) {
+        switch (routeId) {
             case "YELLOW":
                 return "fcee1f";
             case "GREEN":

@@ -95,6 +95,8 @@ public class DepartureListAdapter extends BaseAdapter {
     /**
      * @param position departure's position in the list
      * Parses time from "2013-03-28T11:23:00-05:00" format to "h:mm:ss"
+     *
+     * Wtf was I thinking. There are libraries for this crap
      */
     private void displayArrivalTime(int position) {
         String parsed;
@@ -110,7 +112,7 @@ public class DepartureListAdapter extends BaseAdapter {
             parsed = almostParsed;
         }
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("h:mm:ss");  //converts 24 hour clock to 12 hour
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("h:mm");  //converts 24 hour clock to 12 hour
         try {
             Date dateObj = simpleDateFormat.parse(parsed);
             parsed = simpleDateFormat.format(dateObj);

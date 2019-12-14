@@ -24,7 +24,6 @@ import java.util.ArrayList;
 
 public class FavoritesFragment extends Fragment {
 
-    final String TAG = "FavoritesFragment";
     RelativeLayout instructions;
 
     private ArrayList<Pair<Long, String>> mItemArray;
@@ -35,8 +34,8 @@ public class FavoritesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_favorites, container, false);
-        instructions = (RelativeLayout) rootView.findViewById(R.id.instructions);
-        listView = (DragListView) rootView.findViewById(R.id.favorites_list);
+        instructions = rootView.findViewById(R.id.instructions);
+        listView = rootView.findViewById(R.id.favorites_list);
 
         return rootView;
     }

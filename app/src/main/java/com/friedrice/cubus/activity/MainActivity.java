@@ -24,7 +24,6 @@ import android.view.inputmethod.EditorInfo;
 import com.friedrice.cubus.R;
 import com.friedrice.cubus.fragment.FavoritesFragment;
 import com.friedrice.cubus.fragment.MapFragment;
-import com.friedrice.cubus.fragment.RoutesFragment;
 import com.friedrice.cubus.util.GsonFileUtils;
 
 import java.io.FileInputStream;
@@ -198,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
                         return MapFragment.newInstance(stopLat, stopLon, false);
                     }
                 default:
-                    return new RoutesFragment();
+                    return null;
             }
         }
 
